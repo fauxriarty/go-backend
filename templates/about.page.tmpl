@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portfolio Website</title>
+    <style>
+        body { background-color: #e8e8e8; }
+        header, footer { background-color: #202020; color: white; padding: 1em; }
+        nav { background-color: #f0f0f0; padding: 1em; }
+        main { margin: 2em; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 0.5em; }
+        .section { margin-bottom: 2em; }
+        .figure { margin: 2em 0; text-align: center; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Portfolio</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="about" class="section">
+            <h2>About Me</h2>
+            <p>Introduction about yourself, your background, and your interests. Include superscript and subscript where relevant.</p>
+        </section>
+
+        <section id="skills" class="section">
+            <h2>Skills</h2>
+            <ul>
+                <li>Web Development</li>
+                <li>Graphic Design</li>
+                <li>Project Management</li>
+            </ul>
+        </section>
+
+        <section id="projects" class="section">
+            <h2>Projects</h2>
+            <table>
+                <tr>
+                    <th>Project</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Project 1</td>
+                    <td>Description of the project</td>
+                </tr>
+                <tr>
+                    <td>Project 2</td>
+                    <td>Description of the project</td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="contact" class="section">
+    <h2>Contact</h2>
+    <form action="submit_form_url" method="post">
+        <label>Name:</label><br>
+        <input type="text"><br><br>
+
+        <label>Email:</label><br>
+        <input type="email"><br><br>
+
+        <label>Message:</label><br>
+        <textarea rows="4" cols="50"></textarea><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</section>
+
+
+        <aside>
+            <h3>Additional Information</h3>
+            <p>Side content, links, or other relevant information.</p>
+        </aside>
+    </main>
+    <footer>
+        Footer Content (Hex Color: #202020)
+    </footer>
+</body>
+</html>
