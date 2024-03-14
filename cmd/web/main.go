@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
+	"github.com/alexedwards/scs/v2"
 	"github.com/fauxriarty/go-backend/pkg/config"
 	"github.com/fauxriarty/go-backend/pkg/handlers"
 	"github.com/fauxriarty/go-backend/pkg/render"
@@ -12,9 +14,30 @@ import (
 
 const portNumber = ":8080"
 
+var app config.AppConfig
+var session *scs.SessionManager
+
 // main is the main function
 func main() {
-	var app config.AppConfig
+	app.InProduction = false // set to true in production
+
+	//sessions is like the sharedpref of websites,
+	//stores data that needs to persist during browsing multiple pages of the website
+	session = scs.New()
+	session.Lifetime = 24 * time.Hour // session created will last for 24 hours
+	// by default it stores the sessions in cookies
+
+	session.Cookie.Persist = true
+	// if true, the session will persist after the browser is closed
+
+	session.Cookie.SameSite = http.SameSiteLaxMode
+	//attribute that tells the browser to only send the cookie if
+	// the request originated from the same site
+
+	session.Cookie.Secure = app.InProduction // its a bool declared in appconfig
+	// if true, the cookie will only be sent over https not http
+
+	app.Session = session
 
 	tc, err := render.CreateTemplateCache()
 	if err != nil {

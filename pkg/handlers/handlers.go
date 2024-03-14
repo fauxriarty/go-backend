@@ -8,15 +8,15 @@ import (
 	"github.com/fauxriarty/go-backend/pkg/render"
 )
 
-// Repo is the repository used by the handlers
+// repo is the repository used by the handlers
 var Repo *Repository
 
-// Repository is the repository type
+// repository is the repository type
 type Repository struct {
 	App *config.AppConfig
 }
 
-// NewRepo creates a new repository
+// creates a new repository
 func NewRepo(a *config.AppConfig) *Repository {
 	return &Repository{
 		App: a,
@@ -30,6 +30,9 @@ func NewHandlers(r *Repository) {
 
 // the handler for the home page
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
+	remoteIP := r.RemoteAddr
+	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)
+
 	render.RenderTemplate(w, "home.page.tmpl", &models.TemplateData{})
 }
 
@@ -38,6 +41,9 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 
 	strings := make(map[string]string)
 	strings["test"] = "Hello, again."
+
+	remoteIP := m.App.Session.GetString(r.Context(), "remote_ip")
+	strings["remote_ip"] = remoteIP
 
 	render.RenderTemplate(w, "about.page.tmpl", &models.TemplateData{
 		StringMap: strings,
